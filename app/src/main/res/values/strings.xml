@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MeetingRoomApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facilities">facilities</string>
+    <string name="services">services</string>
+    <string name="capacity">Capacity:</string>
+
+</resources>

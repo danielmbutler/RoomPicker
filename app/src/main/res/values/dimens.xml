@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="room_image_height">250dp</dimen>
+    <dimen name="room_title_text_size">20sp</dimen>
+    <dimen name="room_location_text_size">16sp</dimen>
+    <dimen name="room_capacity_text_size">16sp</dimen>
+    <dimen name="recycler_loading_view_height">80dp</dimen>
+</resources>

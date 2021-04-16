@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/room_detail_rl"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/darker_gray"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            />
+
+        <ProgressBar
+            android:id="@+id/room_detail_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="invisible" />
+
+
+        <ImageView
+            android:id="@+id/room_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/room_image_height"
+            android:scaleType="centerCrop" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/room_detail_ll"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="6dp"
+            android:layout_below="@+id/room_image">
+
+
+            <TextView
+                android:id="@+id/room_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="@dimen/room_title_text_size" />
+
+            <TextView
+                android:id="@+id/room_capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#000"
+                android:textSize="@dimen/room_title_text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/room_location_ll"
+            android:paddingTop="6dp"
+            android:layout_below="@+id/room_detail_ll">
+
+            <TextView
+                android:id="@+id/room_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="@dimen/room_location_text_size" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/room_services_ll"
+            android:paddingTop="6dp"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/room_location_ll">
+
+            <TextView
+                android:id="@+id/room_services_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="@dimen/room_location_text_size" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/room_features_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/room_services_ll"
+            >
+
+            <TextView
+                android:id="@+id/room_features_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="@dimen/room_location_text_size" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/room_facilities_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/room_features_ll"
+            android:layout_marginTop="50dp"
+            android:paddingTop="6dp">
+
+            <TextView
+                android:id="@+id/room_facilities_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=""
+                android:textSize="@dimen/room_location_text_size" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/room_facilities_image_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/room_facilities_ll"
+            android:paddingTop="6dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
