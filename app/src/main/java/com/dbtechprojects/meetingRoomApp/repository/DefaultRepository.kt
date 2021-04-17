@@ -16,8 +16,8 @@ import javax.inject.Inject
 // Repository class to return objects to viewmodels
 
 class DefaultRepository  @Inject constructor(
-        private val api: RoomApi,
-        private val roomDao: RoomDAO,
+    private val api: RoomApi,
+    private val roomDao: RoomDAO,
 )  {
     private val TAG = "Repo"
     private val thirtyAgo = System.currentTimeMillis() - Constants.CACHE
@@ -35,14 +35,17 @@ class DefaultRepository  @Inject constructor(
 
 
     suspend fun getRoomDetails(key: String){
+        //post loading back to ui
         roomitem.postValue(Resource.Loading("Loading"))
 
+
+        // get results from DB
         val roomDetailsItemFromDB = roomDao.getRoomdetails(key)
 
         if (roomDetailsItemFromDB != null){
             //if cache is older than 30 mins ago lets check the api
             if (roomDetailsItemFromDB.timestamp?.toLong()!! < thirtyAgo){
-                Log.d(TAG, "CACHE EXPIRED, GETTINGS ROOMS FROM API")
+                Log.d(TAG, "CACHE EXPIRED, GETTING ROOMS FROM API")
                 val res = api.getRoomDetails(key)
                 if (res.isSuccessful && res.body() != null ){
 
@@ -57,20 +60,25 @@ class DefaultRepository  @Inject constructor(
 
 
                 } else{
+                    //Api Failure
                     return roomitem.postValue(Resource.Error("No Api Response"))
                 }
             } else
-            {
+            {   // Cache not expired return results from DB
                 return roomitem.postValue(Resource.Success(roomDetailsItemFromDB))
             }
 
         } else {
+
+            // no results from DB lets check the API
 
             val res = api.getRoomDetails(key)
             if (res.isSuccessful){
 
                 // add timestamp
                 res.body()?.timestamp = System.currentTimeMillis().toString()
+
+                // insert successful DB entries
 
                 res.body()?.let { roomDao.insertRoomDetailItem(it) }
 
@@ -80,6 +88,7 @@ class DefaultRepository  @Inject constructor(
                 }
 
             } else{
+                //API ERROR
                 return roomitem.postValue(Resource.Error("No Api Response" ))
             }
 
@@ -94,8 +103,10 @@ class DefaultRepository  @Inject constructor(
 
     suspend fun getRooms() {
 
+        //post loading back to ui
         roomlist.postValue(Resource.Loading("Loading"))
 
+        // get results from DB
         val roomsFromDB = roomDao.getRooms()
 
         if (roomsFromDB.isNotEmpty()){
@@ -114,10 +125,12 @@ class DefaultRepository  @Inject constructor(
                         roomlist.postValue(Resource.Success(roomDao.getRooms()))
 
                     } else{
+                        //Api Failure
                         return roomlist.postValue(Resource.Error("No Api Response"))
                     }
                 } else
                 {
+                    // Cache not expired return results from DB
                     return roomlist.postValue(Resource.Success(roomsFromDB))
                 }
 
@@ -129,16 +142,19 @@ class DefaultRepository  @Inject constructor(
                     for (i in res.body()!!){
                         i.timestamp = System.currentTimeMillis().toString()
                     }
+                    // insert successful DB entries
                     roomDao.insertRooms(res.body()!!)
                     return roomlist.postValue(Resource.Success(roomDao.getRooms()))
 
                 } else{
+                    //API FAILURE
                     return roomlist.postValue(Resource.Error("No Api Response" ))
                 }
 
             }
 
         } else {
+            // no results from DB lets check the API
             Log.d(TAG, "ROOM DB is Empty, GETTING ROOMS FROM API")
             val res = api.getRooms()
             if (res.isSuccessful && res.body()?.isNotEmpty() == true){

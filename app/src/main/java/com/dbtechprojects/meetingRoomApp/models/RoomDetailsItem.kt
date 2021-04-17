@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.parcelize.Parcelize
 
 
-// model class for Room_Details_Item
+// model class for Room_Details_Item and RoomDB Table Setup
 
 @Parcelize   // make Room Key  unique to stop duplicate Rooms
 @Entity(
